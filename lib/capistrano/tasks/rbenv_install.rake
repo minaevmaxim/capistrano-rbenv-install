@@ -9,6 +9,7 @@ include Capistrano::DSL::RbenvInstall
 # set :rbenv_roles, :all        # where rbenv should be installed
 # set :rbenv_path,              # ~/.rbenv or /usr/local/rbenv, depends on :rbenv_type
 # set :rbenv_ruby_dir           # "#{fetch(:rbenv_path)}/versions/#{fetch(:rbenv_ruby)}" }
+# set :rbenv_ruby_configure_opts # RUBY_CONFIGURE_OPTS value
 
 namespace :rbenv do
   desc 'Install rbenv'
@@ -42,7 +43,7 @@ namespace :rbenv do
     on roles fetch(:rbenv_roles) do
       next if test "[ -d #{fetch(:rbenv_ruby_dir)} ]"
       invoke 'rbenv:update_ruby_build'
-      execute rbenv_bin_executable_path, :install, fetch(:rbenv_ruby)
+      execute rbenv_ruby_configure_opts, rbenv_bin_executable_path, :install, fetch(:rbenv_ruby)
     end
   end
 

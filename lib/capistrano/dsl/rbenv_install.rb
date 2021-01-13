@@ -10,6 +10,10 @@ module Capistrano
         "#{fetch(:rbenv_path)}/bin/rbenv"
       end
 
+      def rbenv_ruby_configure_opts
+        "RUBY_CONFIGURE_OPTS='#{fetch(:rbenv_ruby_configure_opts)}'"
+      end
+
       def rbenv_repo_url
         'https://github.com/sstephenson/rbenv.git'
       end
